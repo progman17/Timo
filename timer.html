@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تايمر Timo - مؤقت لإدارة الوقت بكفاءة</title>
+    <meta name="description"
+        content="تايمر Timo يساعدك في إدارة وقتك بكفاءة وتحقيق أهدافك. استخدم المؤقت البسيط لتنظيم يومك وإدارة وقتك بفعالية.">
+    <meta name="keywords" content="  تيمو , تيمو تايمر ,تايمر, مؤقت, إدارة الوقت, تنظيم الوقت, مؤقت زمني, Timo, مؤقت لتنظيم الوقت">
+    <meta name="author" content="Ayman Shaaban" >
+    <link rel="stylesheet" href="master.css">
+  
+</head>
+
+<body>
+    <h1>مرحباً بك في Timo - مؤقت زمني لإدارة وقتك</h1>
+    <div>
+        <p>هل ترغب في إدارة وقتك بكفاءة وتحقيق أهدافك؟ استخدم هذا المؤقت البسيط لبدء رحلتك في تنظيم الوقت.</p>
+    </div>
+    <div>
+        <h2>أدخل الوقت المحدد</h2>
+        <input type="number" id="hours" placeholder="ساعات" min="0" style="width: 70px;">
+        <input type="number" id="minutes" placeholder="دقائق" min="0" style="width: 70px;">
+        <input type="number" id="seconds" placeholder="ثواني" min="0" style="width: 70px;">
+    </div>
+    <div>
+        <h2>اختر صوت التنبيه</h2>
+        <select id="alarmSelect">
+            <option value="1.mp3">صوت 1</option>
+            <option value="2.mp3">صوت 2</option>
+            <option value="3.mp3">صوت 3</option>
+        </select>
+        <button id="listenButton">استمع</button>
+    </div>
+    <div>
+        <button id="startButton">ابدأ</button>
+    </div>
+    <div class="bord">
+        <div class="timer">
+            00:00:00
+        </div>
+    </div>
+
+    <!-- إضافة الموسيقى -->
+    <audio id="alarmSound">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+    <hr>
+    <h2 class="ana">
+        To contact me 
+    </h2>
+    <a href="https://www.facebook.com/aymnkhattap" target="_blank">Facebook</a>
+    <br><br>
+    <a href="https://www.instagram.com/ayman_shaaban17/?hl=en" target="_blank">Instagram</a>
+    <br><br>
+    <a href="https://www.tiktok.com/@ayman_shaaban17" target="_blank" >TikTok</a>
+    <br><br>
+    <h4>Gmail: aymankhattap2021@gmail.com </h4>
+
+    <script>
+        let timerElement = document.getElementById('timer');
+        let alarmSound = document.getElementById('alarmSound');
+        let countdown;
+
+        // زر الاستماع للصوت
+        document.getElementById('listenButton').addEventListener('click', function () {
+            let selectedSound = document.getElementById('alarmSelect').value;
+            alarmSound.src = selectedSound;
+            alarmSound.play();
+        });
+
+        // زر بدء التايمر
+        document.getElementById('startButton').addEventListener('click', function () {
+            clearInterval(countdown);
+
+            let hours = parseInt(document.getElementById('hours').value) || 0;
+            let minutes = parseInt(document.getElementById('minutes').value) || 0;
+            let seconds = parseInt(document.getElementById('seconds').value) || 0;
+
+            // التحقق من إدخال الوقت بشكل صحيح
+            let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+            if (totalSeconds <= 0) {
+                alert("الرجاء إدخال وقت صحيح!");
+                return;
+            }
+
+            // اختيار صوت التنبيه
+            let selectedSound = document.getElementById('alarmSelect').value;
+            alarmSound.src = selectedSound;
+
+            countdown = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(countdown);
+                    alarmSound.play();
+                } else {
+                    totalSeconds--;
+                    let displayHours = Math.floor(totalSeconds / 3600);
+                    let displayMinutes = Math.floor((totalSeconds % 3600) / 60);
+                    let displaySeconds = totalSeconds % 60;
+
+                    // إضافة صفر إذا كان الرقم أقل من 10
+                    displayHours = displayHours < 10 ? '0' + displayHours : displayHours;
+                    displayMinutes = displayMinutes < 10 ? '0' + displayMinutes : displayMinutes;
+                    displaySeconds = displaySeconds < 10 ? '0' + displaySeconds : displaySeconds;
+
+                    timerElement.textContent = `${displayHours}:${displayMinutes}:${displaySeconds}`;
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

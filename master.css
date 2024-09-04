@@ -1,0 +1,43 @@
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #64fc0c;
+     text-align: center;
+     padding: 20px;
+ }
+
+ .ana {
+     text-align: left;
+ }
+
+ h1 {
+     color: #0846f1;
+ }
+
+ input,
+ button,
+ select {
+     padding: 10px;
+     margin: 10px;
+     border-radius: 5px;
+     border: 1px solid #040404;
+     box-shadow: 0 0 20px #03c8ff;
+     font-size: 16px;
+ }
+ 
+
+ .timer {
+     font-size: 48px;
+     border:#0846f1 3px solid ;
+     color: #007bff;
+     background: #0c0409;
+     border-radius: 20px;
+     
+    padding: 10px;
+     
+ }
+
+ a {
+     color: #0846f1;
+     text-decoration: none;
+     cursor: grab;
+ }
